@@ -4,3 +4,4 @@ pyarrow==16.1.0
 requests==2.32.3
 psycopg2-binary==2.9.9
 pytest==8.2.0
+openpyxl==3.1.5

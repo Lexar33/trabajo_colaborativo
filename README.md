@@ -55,30 +55,6 @@ These services work together in an isolated environment to run Airflow smoothly.
                                                                                          +-----------------------------+
 ```
 
-
-Turn on both DAGs: **crypto_prices_etl** and **crypto_aggregates**.
-
-### Optional: configure coins
-Admin → Variables → add Variable `coins` (e.g., `bitcoin,ethereum,solana,dogecoin`).
-
-### Output files
-- `./data/crypto_prices.parquet`
-- `./data/crypto_daily_avgs.parquet`
-
-
-### Demo warehouse (Postgres)
-- Host: localhost, Port: 5433, User: demo, Password: demo, DB: warehouse
-
-### Optional: Redis UI
-
-You can explore the Redis broker that Airflow uses for the Celery executor:
-
-- **Redis Commander** is included in this setup at [http://localhost:8081](http://localhost:8081).
-- It connects to the `redis` service automatically (`REDIS_HOSTS=local:redis:6379`).
-- Use it to inspect Celery queues (`celery`, `unacked`, etc.), view keys, and debug task distribution.
-
-Alternatively, you can install **RedisInsight** (desktop GUI) and connect it to `localhost:6379` for a more advanced view.
-
 ## Testing
 
 ```bash
