@@ -1,7 +1,7 @@
 # TRABAJO COLABORATIVO
 
-Curso: Producto académico colaborativo
-Versión: 1.0.1
+* Curso: Producto académico colaborativo
+* Versión: 1.0.1
 
 ## Alumnos
 
