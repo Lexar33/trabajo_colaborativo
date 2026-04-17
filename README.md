@@ -18,7 +18,7 @@ docker compose up -d
 # UI: http://localhost:8080  (admin / admin)
 ```
 
-## Airflow Task
+## Airflow DAG
 
 Frecuencia: Cada hora
 
