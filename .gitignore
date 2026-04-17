@@ -2,7 +2,6 @@
 __pycache__/
 airflow.cfg
 logs/
-data/
 *.pyc
 .DS_Store
 .env
