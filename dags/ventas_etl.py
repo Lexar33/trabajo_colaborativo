@@ -73,17 +73,34 @@ def ventas_etl():
         # Eliminar la columna original
         df.drop(columns=['Fecha'], inplace=True)
         # Renombrar columnas
-        df.rename(columns={'Costo': 'costo', 'AUTO': 'auto','CAMIÓN':'camion','Año':'ano','MES':'mes','AUTOBUS':'autobus','CAMIONETA':'camioneta','Empresa':'empresa','Persona':'persona'}, inplace=True)
         return df
+    
+
+
+    @task 
+    def renombrar_columnas(df:pd.DataFrame) -> pd.DataFrame:
+        df.rename(columns={'Costo': 'costo', 'AUTO': 'auto','CAMIÓN':'camion','Año':'ano','Mes':'mes','AUTOBUS':'autobus','CAMIONETA':'camioneta','Empresa':'empresa','Persona':'persona'}, inplace=True)
+        df.rename(columns={'San Miguel': 'san_miguel'}, inplace=True)
+        df.rename(columns={'Surco': 'surco'}, inplace=True)
+        df.rename(columns={'Ate': 'ate'}, inplace=True)
+        df.rename(columns={'La Molina': 'la_molina'}, inplace=True)
+        return df
+
+
 
     @task 
     def guardar_dataframe(df:pd.DataFrame):
-        print(df)
+        import sqlalchemy as sa
+        engine = sa.create_engine("postgresql+psycopg2://demo:demo@warehouse-db:5432/warehouse")
+        with engine.begin() as conn:
+            df.to_sql("ventas_procesado", conn, if_exists="append", index=False)
+        
 
     df_ventas= leer_archivo_ventas()
     df_vehiculos= leer_archivo_vehiculos()
-    df=procesar_dataframe(df_ventas,df_vehiculos)
-    guardar_dataframe(df)
+    df1=procesar_dataframe(df_ventas,df_vehiculos)
+    df2=renombrar_columnas(df1)
+    guardar_dataframe(df2)
 
 
 
